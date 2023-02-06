@@ -1,11 +1,14 @@
 ## build
 FROM golang:1.19-alpine AS build
 
+RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories
+RUN apk add --no-cache gcc musl-dev linux-headers
+
 WORKDIR /usr/src/app
 
 # pre-copy/cache go.mod for pre-downloading dependencies and only redownloading them in subsequent builds if they change
 COPY go.mod go.sum ./
-RUN go mod download && go mod verify
+RUN CGO_ENABLED=0 GOOS=linux go mod download && go mod verify
 
 # 将源代码复制到映像中
 COPY . .
@@ -20,12 +23,13 @@ RUN go build -v -o /usr/local/bin/app ./cmd
 FROM alpine:3.17
 
 WORKDIR /
-COPY --from=build /usr/local/bin/app /usr/local/bin/app
+COPY --from=build /usr/local/bin/app .
+COPY --from=build /usr/src/app/.env ./.env
 
 EXPOSE 8080
 
 #USER nonroot:nonroot
 #RUN chmod -R 777 /usr/local/bin/app
 
-ENTRYPOINT ["/usr/local/bin/app"]
+ENTRYPOINT ["/app"]
 

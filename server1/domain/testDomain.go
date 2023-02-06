@@ -16,12 +16,12 @@ const (
 
 // ************* Model Struct **************
 type TestStruct struct {
-	Id         int64            `json:"id"`
-	Name       string           `json:"name" form:"name" binding:"required"`
-	Age        int64            `json:"age" form:"age" binding:"required"`
-	Status     TestStructStatus `json:"status" form:"status"`
-	CreateTime int64            `json:"create_time"`
-	UpdateTime int64            `json:"update_time"`
+	Id         int64            `json:"id" db:"id"`
+	Name       string           `json:"name" db:"name"`
+	Age        int64            `json:"age" db:"age"`
+	Status     TestStructStatus `json:"status"  db:"status"`
+	CreateTime int64            `json:"create_time" db:"create_time"`
+	UpdateTime int64            `json:"update_time" db:"update_time"`
 }
 
 // ************* param **************

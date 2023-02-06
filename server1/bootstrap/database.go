@@ -9,13 +9,14 @@ import (
 
 func NewMysqlDatabase(env *Env) *sqlx.DB {
 	//dsn := "user:password@tcp(127.0.0.1:3306)/sql_test?charset=utf8mb4&parseTime=True"
-
+	log.Printf("dbHost:%s, dbPort:%s\n", env.DBHost, env.DBPort)
 	cfg := mysql.Config{
-		User:   env.DBUser,
-		Passwd: env.DBPass,
-		Net:    "tcp",
-		Addr:   fmt.Sprintf("%s:%s", env.DBHost, env.DBPort),
-		DBName: env.DBName,
+		User:                 env.DBUser,
+		Passwd:               env.DBPass,
+		Net:                  "tcp",
+		Addr:                 fmt.Sprintf("%s:%s", env.DBHost, env.DBPort),
+		DBName:               env.DBName,
+		AllowNativePasswords: true,
 	}
 
 	db, err := sqlx.Connect("mysql", cfg.FormatDSN())
