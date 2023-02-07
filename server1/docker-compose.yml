@@ -11,7 +11,7 @@ services:
     container_name: server1
     env_file: .env
     ports:
-      - 80:8080
+      - 8081:8081
     restart: unless-stopped
 
 
@@ -39,3 +39,8 @@ services:
       --character-set-server=utf8mb4
       --collation-server=utf8mb4_general_ci
       --lower-case-table-names=1 # 设置表名大小写不敏感
+
+networks:
+  go-web-demo-net:
+    # 声明这个网络是外部定义的
+    external: true

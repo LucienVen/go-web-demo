@@ -12,7 +12,7 @@ RUN CGO_ENABLED=0 GOOS=linux go mod download && go mod verify
 
 # 将源代码复制到映像中
 COPY . .
-RUN go build -v -o /usr/local/bin/app ./cmd
+RUN go build -v -o /usr/local/bin/server1 ./cmd
 
 #EXPOSE 8080
 #CMD ["app"]
@@ -23,13 +23,13 @@ RUN go build -v -o /usr/local/bin/app ./cmd
 FROM alpine:3.17
 
 WORKDIR /
-COPY --from=build /usr/local/bin/app .
+COPY --from=build /usr/local/bin/server1 .
 COPY --from=build /usr/src/app/.env ./.env
 
-EXPOSE 8080
+EXPOSE 8081
 
 #USER nonroot:nonroot
 #RUN chmod -R 777 /usr/local/bin/app
 
-ENTRYPOINT ["/app"]
+ENTRYPOINT ["/server1"]
 
