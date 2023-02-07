@@ -45,7 +45,7 @@ func (tr *TestRepository) Update(c context.Context, test *domain.TestStruct) err
 func (tr *TestRepository) GetById(c context.Context, id int64) (domain.TestStruct, error) {
 	sqlStr := fmt.Sprintf("select * from %s where id=?", tr.table)
 	var ret domain.TestStruct
-	err := tr.database.Get(&ret, sqlStr, 1)
+	err := tr.database.Get(&ret, sqlStr, id)
 	if err != nil && !errors.Is(err, sql.ErrNoRows) {
 		return ret, err
 	}
