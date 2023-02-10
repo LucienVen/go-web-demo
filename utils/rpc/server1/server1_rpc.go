@@ -1,0 +1,23 @@
+package server1
+
+import (
+	"context"
+	"fmt"
+	"github.com/LucienVen/go-web-demo/utils/pb"
+)
+
+type Server1Rpc struct{}
+
+func NewServer1Rpc() *Server1Rpc {
+	return &Server1Rpc{}
+}
+
+func (r *Server1Rpc) mustEmbedUnimplementedHelloServer() {
+	//TODO implement me
+	panic("implement me")
+}
+
+func (r *Server1Rpc) SayHello(ctx context.Context, req *pb.SayHelloReq) (*pb.SayHelloRes, error) {
+	greet := fmt.Sprintf("Hello, %s!", req.ServerName)
+	return &pb.SayHelloRes{Greet: greet}, nil
+}
