@@ -37,5 +37,7 @@ func main() {
 
 	routeV1.Setup(env, timeout, db, routerV1)
 
+	// 初始化grpc
+
 	r.Run() // 监听并在 0.0.0.0:8080 上启动服务
 }

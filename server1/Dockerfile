@@ -27,6 +27,7 @@ COPY --from=build /usr/local/bin/server1 .
 COPY --from=build /usr/src/app/.env ./.env
 
 EXPOSE 8081
+EXPOSE 50051
 
 #USER nonroot:nonroot
 #RUN chmod -R 777 /usr/local/bin/app

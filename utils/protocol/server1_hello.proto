@@ -1,0 +1,18 @@
+syntax = "proto3";
+
+option go_package = "github.com/LucienVen/go-web-demo/utils/protocol/pb";
+
+package server1;
+
+// 作为server
+service Hello {
+  rpc SayHello(SayHelloReq) returns (SayHelloRes) {}
+}
+
+message SayHelloReq {
+  string server_name = 1; // 服务名称
+}
+
+message SayHelloRes {
+  string greet = 1; // 问候语
+}
