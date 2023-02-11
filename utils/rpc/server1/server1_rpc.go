@@ -3,7 +3,7 @@ package server1
 import (
 	"context"
 	"fmt"
-	"github.com/LucienVen/go-web-demo/utils/pb"
+	"github.com/LucienVen/go-web-demo/utils/rpc/pb"
 )
 
 type Server1Rpc struct{}

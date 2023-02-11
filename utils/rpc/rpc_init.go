@@ -1,7 +1,7 @@
 package rpc
 
 import (
-	"github.com/LucienVen/go-web-demo/utils/pb"
+	"github.com/LucienVen/go-web-demo/utils/rpc/pb"
 	"github.com/LucienVen/go-web-demo/utils/rpc/server1"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/reflection"
@@ -9,8 +9,9 @@ import (
 )
 
 // 初始化rpc server
-func RunGrpcServer(port string) error {
+func RunGrpcServer(serverName, port string) error {
 	s := grpc.NewServer()
+	// TODO 使用 serverName 进行注册
 	pb.RegisterHelloServer(s, server1.NewServer1Rpc())
 	reflection.Register(s)
 
@@ -18,6 +19,6 @@ func RunGrpcServer(port string) error {
 	if err != nil {
 		return err
 	}
-	
+
 	return s.Serve(lis)
 }

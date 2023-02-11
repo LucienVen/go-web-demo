@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-option go_package = "github.com/LucienVen/go-web-demo/utils/protocol/pb";
+option go_package = "github.com/LucienVen/go-web-demo/utils/rpc/pb";
 
 package server1;
 
