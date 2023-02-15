@@ -8,7 +8,6 @@ package pb
 
 import (
 	context "context"
-	"github.com/LucienVen/go-web-demo/utils/rpc"
 	grpc "google.golang.org/grpc"
 	codes "google.golang.org/grpc/codes"
 	status "google.golang.org/grpc/status"
@@ -67,7 +66,7 @@ type UnsafeHelloServer interface {
 	mustEmbedUnimplementedHelloServer()
 }
 
-func RegisterHelloServer(s grpc.ServiceRegistrar, srv *rpc.Server1Rpc) {
+func RegisterHelloServer(s grpc.ServiceRegistrar, srv HelloServer) {
 	s.RegisterService(&Hello_ServiceDesc, srv)
 }
 

@@ -1,6 +1,8 @@
 package domain
 
-import "golang.org/x/net/context"
+import (
+	"golang.org/x/net/context"
+)
 
 const (
 	TestTable = "user" // 测试用，实质上是user表
@@ -15,6 +17,7 @@ const (
 )
 
 // ************* Model Struct **************
+// 直接关联数据库（可以看做与数据库字段的映射）
 type TestStruct struct {
 	Id         int64            `json:"id" db:"id"`
 	Name       string           `json:"name" db:"name"`
@@ -25,6 +28,7 @@ type TestStruct struct {
 }
 
 // ************* param **************
+// 入参出参定义与model分开
 
 // 创建入参
 type CreateTestParam struct {
@@ -68,3 +72,7 @@ type TestUsecase interface {
 	Update(c context.Context, test *TestStruct) error        // 更新
 	GetById(c context.Context, id int64) (TestStruct, error) // 通过ID查询
 }
+
+//type TestRpcUsecase interface {
+//	SayHello(c context.Context, req *pb.SayHelloReq) (*pb.SayHelloRes, error)
+//}
