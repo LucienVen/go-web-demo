@@ -53,3 +53,21 @@ func (tu TestUsecase) GetById(c context.Context, id int64) (domain.TestStruct, e
 //List(c context.Context) ([]TestStruct, error)
 //Update(c context.Context, test *TestStruct) error        // 更新
 //GetById(c context.Context, id int64) (TestStruct, error) // 通过ID查询
+
+// ************************************
+//type TestRpcUsecase struct {
+//	testRepository domain.TestRepository
+//	contextTimeout time.Duration
+//}
+//
+//// rpc useCase
+//func NewTestRpcUsecase(testRepository domain.TestRepository, timeout time.Duration) domain.TestRpcUsecase {
+//	return &TestRpcUsecase{
+//		testRepository: testRepository,
+//		contextTimeout: timeout,
+//	}
+//}
+//
+//func (tru *TestRpcUsecase) SayHello(c context.Context, req *pb.SayHelloReq) (*pb.SayHelloRes, error) {
+//
+//}

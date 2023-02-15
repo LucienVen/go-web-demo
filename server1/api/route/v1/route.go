@@ -24,4 +24,7 @@ func Setup(env *bootstrap.Env, timeout time.Duration, db *sqlx.DB, routeV1 *gin.
 	// Private APIs 私有API
 	//protectedRouteV1 := routeV1.Group("")
 	// 中间件
+
+	// rpc 服务注册
+
 }

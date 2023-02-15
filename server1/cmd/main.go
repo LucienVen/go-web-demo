@@ -4,8 +4,10 @@ import (
 	"fmt"
 	routeV1 "github.com/LucienVen/go-web-demo/server1/api/route/v1"
 	"github.com/LucienVen/go-web-demo/server1/bootstrap"
-	"github.com/LucienVen/go-web-demo/server1/internal/log"
+	logger "github.com/LucienVen/go-web-demo/server1/internal/log"
 	"github.com/gin-gonic/gin"
+	"log"
+	"net"
 	"time"
 )
 
@@ -16,28 +18,44 @@ func main() {
 
 	env := app.Env
 	db := app.Mysql
+	rpc := app.Rpc
 	defer app.CloseApplication()
 
 	// 初始化日志组件
-	log.InitLogger(env)
+	logger.InitLogger(env)
 
 	timeout := time.Duration(env.ContextTimeout) * time.Second
 
 	r := gin.Default()
 
-	//r.GET("/ping", func(c *gin.Context) {
-	//	c.JSON(200, gin.H{
-	//		"message": "hello, server1",
-	//	})
-	//})
-
-	//routeV1.Handle(r)
-
 	routerV1 := r.Group("v1")
 
 	routeV1.Setup(env, timeout, db, routerV1)
+	errChan := make(chan error)
+
+	// HTTP 服务
+	go func() {
+		err := r.Run() // 监听并在 0.0.0.0:8080 上启动服务
+		if err != nil {
+			errChan <- err
+		}
+	}()
 
 	// 初始化grpc
+	go func() {
+		lis, err := net.Listen("tcp", env.RpcServer1Port)
+		if err != nil {
+			errChan <- err
+		}
 
-	r.Run() // 监听并在 0.0.0.0:8080 上启动服务
+		err = rpc.Serve(lis)
+		if err != nil {
+			errChan <- err
+		}
+	}()
+
+	select {
+	case err := <-errChan:
+		log.Fatalf("Run Server err: %v", err)
+	}
 }
