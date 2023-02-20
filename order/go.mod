@@ -3,7 +3,6 @@ module github.com/LucienVen/go-web-demo/server2
 go 1.19
 
 require (
-	github.com/LucienVen/go-web-demo/server2 v0.0.0-20230206133238-add745875200
 	github.com/gin-gonic/gin v1.8.2
 	github.com/go-sql-driver/mysql v1.7.0
 	github.com/jmoiron/sqlx v1.3.5

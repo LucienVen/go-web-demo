@@ -12,7 +12,7 @@ import (
 )
 
 func main() {
-	fmt.Println("hello, server1")
+	fmt.Println("hello, user")
 
 	app := bootstrap.App()
 

@@ -19,7 +19,7 @@ import (
 func Setup(env *bootstrap.Env, timeout time.Duration, db *sqlx.DB, routeV1 *gin.RouterGroup, rpcClient bootstrap.RpcClient) {
 	// public APIs 公共API
 	publicRouteV1 := routeV1.Group("")
-	NewTestRouter(env, timeout, db, publicRouteV1)
+	NewTestRouter(env, timeout, db, publicRouteV1, rpcClient)
 
 	// Private APIs 私有API
 	//protectedRouteV1 := routeV1.Group("")

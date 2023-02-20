@@ -10,7 +10,7 @@ import (
 )
 
 func main() {
-	fmt.Println("hello, server2")
+	fmt.Println("hello, order")
 
 	app := bootstrap.App()
 
@@ -27,7 +27,7 @@ func main() {
 
 	//r.GET("/ping", func(c *gin.Context) {
 	//	c.JSON(200, gin.H{
-	//		"message": "hello, server2",
+	//		"message": "hello, order",
 	//	})
 	//})
 

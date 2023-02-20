@@ -8,7 +8,7 @@ services:
       # 使用 context 指令指定 Dockerfile.bak 所在文件夹的路径
       context: .
       dockerfile: Dockerfile
-    container_name: server2
+    container_name: order
     env_file: .env
     ports:
       - 8082:8082

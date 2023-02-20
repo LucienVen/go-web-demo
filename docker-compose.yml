@@ -1,25 +1,37 @@
 version: '3.8'
 
 services:
-  go-web-demo-server1:
-    depends_on: 
+  go-web-demo-user:
+    depends_on:
       - mysql
     build:
       # 使用 context 指令指定 Dockerfile.bak 所在文件夹的路径
       context: .
-      dockerfile: Dockerfile
+      dockerfile: ./user/Dockerfile
     container_name: user
-    env_file: .env
+    env_file: ./user/.env
     ports:
       - 8081:8081
     restart: unless-stopped
 
+  go-web-demo-order:
+    depends_on:
+      - mysql
+    build:
+      # 使用 context 指令指定 Dockerfile.bak 所在文件夹的路径
+      context: .
+      dockerfile: ./order/Dockerfile
+    container_name: order
+    env_file: ./order/.env
+    ports:
+      - 8082:8082
+    restart: unless-stopped
 
   mysql:
     image: mysql:latest
     container_name: mysql
     restart: unless-stopped
-    env_file: .env
+    env_file: ./user/.env
     ports:
       - 3306:3306
     environment:
@@ -40,7 +52,9 @@ services:
       --collation-server=utf8mb4_general_ci
       --lower-case-table-names=1 # 设置表名大小写不敏感
 
-networks:
-  go-web-demo-net:
-    # 声明这个网络是外部定义的
-    external: true
+
+#
+#networks:
+#  go-web-demo-net:
+#    # 声明这个网络是外部定义的
+#    external: true
