@@ -6,9 +6,10 @@ import (
 )
 
 type Application struct {
-	Env   *Env
-	Mysql *sqlx.DB
-	Rpc   *grpc.Server
+	Env       *Env
+	Mysql     *sqlx.DB
+	Rpc       *grpc.Server
+	RpcClient RpcClient
 }
 
 func App() Application {
@@ -16,9 +17,14 @@ func App() Application {
 	app.Env = NewEnv()
 	app.Mysql = NewMysqlDatabase(app.Env)
 	app.Rpc = NewRpcServer(app.Env)
+	app.RpcClient = InitRpcClient(app.Env)
 	return *app
 }
 
 func (app *Application) CloseApplication() {
 	CloseMysqlDbConnection(app.Mysql)
 }
+
+//func (app *Application) InitRpcClient(closeChan chan struct{}) {
+//	app.RpcClient = NewRpcClient(app.Env, closeChan)
+//}

@@ -16,7 +16,7 @@ import (
 //
 //}
 
-func Setup(env *bootstrap.Env, timeout time.Duration, db *sqlx.DB, routeV1 *gin.RouterGroup) {
+func Setup(env *bootstrap.Env, timeout time.Duration, db *sqlx.DB, routeV1 *gin.RouterGroup, rpcClient bootstrap.RpcClient) {
 	// public APIs 公共API
 	publicRouteV1 := routeV1.Group("")
 	NewTestRouter(env, timeout, db, publicRouteV1)
