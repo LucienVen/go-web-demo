@@ -19,6 +19,7 @@ func main() {
 	env := app.Env
 	db := app.Mysql
 	rpc := app.Rpc
+	rpcClient := app.RpcClient
 	defer app.CloseApplication()
 
 	// 初始化日志组件
@@ -30,7 +31,7 @@ func main() {
 
 	routerV1 := r.Group("v1")
 
-	routeV1.Setup(env, timeout, db, routerV1)
+	routeV1.Setup(env, timeout, db, routerV1, rpcClient)
 	errChan := make(chan error)
 
 	// HTTP 服务

@@ -11,7 +11,7 @@ import (
 	"time"
 )
 
-func NewTestRouter(env *bootstrap.Env, timeout time.Duration, db *sqlx.DB, group *gin.RouterGroup) {
+func NewTestRouter(env *bootstrap.Env, timeout time.Duration, db *sqlx.DB, group *gin.RouterGroup, rpcClient bootstrap.RpcClient) {
 	tr := repository.NewTestRepository(db, domain.TestTable)
 	tc := &controller.TestController{
 		TestUsecase: usecase.NewTestUsecase(tr, timeout),
