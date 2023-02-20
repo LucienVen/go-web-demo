@@ -46,15 +46,15 @@ import (
 // *********** 手动创建 grpc client ***********
 
 var (
-	Server2RpcClient pb.HelloClient // Server2
+	Server2RpcClient pb.HelloClient // Order
 )
 
 type RpcClient struct {
-	Server2 pb.HelloClient
+	Order pb.HelloClient
 }
 
 func InitRpcClient(env *Env) RpcClient {
-	addr := fmt.Sprintf("%s:%s", "server2", env.RpcServer2Port)
+	addr := fmt.Sprintf("%s:%s", "order", env.RpcServer2Port)
 
 	opts := make([]grpc.DialOption, 0)
 	opts = append(opts, grpc.WithTransportCredentials(insecure.NewCredentials()))
@@ -68,7 +68,7 @@ func InitRpcClient(env *Env) RpcClient {
 	Server2RpcClient = pb.NewHelloClient(conn)
 
 	return RpcClient{
-		Server2: Server2RpcClient,
+		Order: Server2RpcClient,
 	}
 
 }
