@@ -1,0 +1,18 @@
+syntax = "proto3";
+
+option go_package = "github.com/LucienVen/go-web-demo/utils/rpc/pb";
+
+package order;
+
+// 作为server
+service OrderService {
+  rpc OrderSayHello(OrderSayHelloReq) returns (OrderSayHelloRes) {}
+}
+
+message OrderSayHelloReq {
+  string server_name = 1; // 服务名称
+}
+
+message OrderSayHelloRes {
+  string greet = 1; // 问候语
+}
