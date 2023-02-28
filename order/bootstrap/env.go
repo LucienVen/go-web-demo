@@ -19,6 +19,9 @@ type Env struct {
 	RefreshTokenExpiryHour int    `mapstructure:"REFRESH_TOKEN_EXPIRY_HOUR"`
 	AccessTokenSecret      string `mapstructure:"ACCESS_TOKEN_SECRET"`
 	RefreshTokenSecret     string `mapstructure:"REFRESH_TOKEN_SECRET"`
+	UserServicePort        string `mapstructure:"USER_SERVICE_PORT"`  // user rpc 监听端口
+	OrderServicePort       string `mapstructure:"ORDER_SERVICE_PORT"` // order rpc 监听端口
+	RpcClient              string `mapstructure:"RPC_CLIENT"`         // 服务名:端口，逗号分割
 }
 
 func NewEnv() *Env {
