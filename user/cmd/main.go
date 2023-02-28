@@ -44,7 +44,7 @@ func main() {
 
 	// 初始化grpc
 	go func() {
-		lis, err := net.Listen("tcp", env.RpcServer1Port)
+		lis, err := net.Listen("tcp", env.UserServicePort)
 		if err != nil {
 			errChan <- err
 		}

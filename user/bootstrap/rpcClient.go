@@ -54,7 +54,7 @@ type RpcClient struct {
 }
 
 func InitRpcClient(env *Env) RpcClient {
-	addr := fmt.Sprintf("%s:%s", "order", env.RpcServer2Port)
+	addr := fmt.Sprintf("%s:%s", "order", env.OrderServicePort)
 
 	opts := make([]grpc.DialOption, 0)
 	opts = append(opts, grpc.WithTransportCredentials(insecure.NewCredentials()))
