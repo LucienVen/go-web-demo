@@ -2,9 +2,9 @@ package controller
 
 import "C"
 import (
-	"github.com/LucienVen/go-web-demo/server2/bootstrap"
-	"github.com/LucienVen/go-web-demo/server2/domain"
-	logger "github.com/LucienVen/go-web-demo/server2/internal/log"
+	"github.com/LucienVen/go-web-demo/order/bootstrap"
+	"github.com/LucienVen/go-web-demo/order/domain"
+	logger "github.com/LucienVen/go-web-demo/order/internal/log"
 	"github.com/gin-gonic/gin"
 	"go.uber.org/zap"
 	"net/http"

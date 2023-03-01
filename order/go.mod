@@ -1,4 +1,4 @@
-module github.com/LucienVen/go-web-demo/server2
+module github.com/LucienVen/go-web-demo/order
 
 go 1.19
 
