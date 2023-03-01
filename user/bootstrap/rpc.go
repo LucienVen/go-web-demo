@@ -1,7 +1,7 @@
 package bootstrap
 
 import (
-	"github.com/LucienVen/go-web-demo/server1/internal/rpc"
+	"github.com/LucienVen/go-web-demo/user/internal/rpc"
 	"github.com/LucienVen/go-web-demo/utils/rpc/pb"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/reflection"
