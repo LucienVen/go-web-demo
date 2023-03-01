@@ -1,4 +1,4 @@
-module github.com/LucienVen/go-web-demo/server1
+module github.com/LucienVen/go-web-demo/user
 
 go 1.19
 

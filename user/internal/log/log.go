@@ -2,7 +2,7 @@ package log
 
 import (
 	"fmt"
-	"github.com/LucienVen/go-web-demo/server1/bootstrap"
+	"github.com/LucienVen/go-web-demo/user/bootstrap"
 	"go.uber.org/zap"
 	"go.uber.org/zap/zapcore"
 	"os"
