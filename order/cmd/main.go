@@ -2,9 +2,9 @@ package main
 
 import (
 	"fmt"
-	routeV1 "github.com/LucienVen/go-web-demo/server2/api/route/v1"
-	"github.com/LucienVen/go-web-demo/server2/bootstrap"
-	"github.com/LucienVen/go-web-demo/server2/internal/log"
+	routeV1 "github.com/LucienVen/go-web-demo/order/api/route/v1"
+	"github.com/LucienVen/go-web-demo/order/bootstrap"
+	"github.com/LucienVen/go-web-demo/order/internal/log"
 	"github.com/gin-gonic/gin"
 	"time"
 )

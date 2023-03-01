@@ -4,7 +4,7 @@ import (
 	"context"
 	"database/sql"
 	"fmt"
-	"github.com/LucienVen/go-web-demo/server2/domain"
+	"github.com/LucienVen/go-web-demo/order/domain"
 	"github.com/jmoiron/sqlx"
 	"github.com/pkg/errors"
 )

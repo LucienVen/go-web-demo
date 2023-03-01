@@ -1,11 +1,11 @@
 package v1
 
 import (
-	"github.com/LucienVen/go-web-demo/server2/api/controller"
-	"github.com/LucienVen/go-web-demo/server2/bootstrap"
-	"github.com/LucienVen/go-web-demo/server2/domain"
-	"github.com/LucienVen/go-web-demo/server2/repository"
-	"github.com/LucienVen/go-web-demo/server2/usecase"
+	"github.com/LucienVen/go-web-demo/order/api/controller"
+	"github.com/LucienVen/go-web-demo/order/bootstrap"
+	"github.com/LucienVen/go-web-demo/order/domain"
+	"github.com/LucienVen/go-web-demo/order/repository"
+	"github.com/LucienVen/go-web-demo/order/usecase"
 	"github.com/gin-gonic/gin"
 	"github.com/jmoiron/sqlx"
 	"time"

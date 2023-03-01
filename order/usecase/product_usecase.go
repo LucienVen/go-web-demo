@@ -2,7 +2,7 @@ package usecase
 
 import (
 	"context"
-	"github.com/LucienVen/go-web-demo/server2/domain"
+	"github.com/LucienVen/go-web-demo/order/domain"
 	"time"
 )
 

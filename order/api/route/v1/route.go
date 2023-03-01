@@ -1,7 +1,7 @@
 package v1
 
 import (
-	"github.com/LucienVen/go-web-demo/server2/bootstrap"
+	"github.com/LucienVen/go-web-demo/order/bootstrap"
 	"github.com/gin-gonic/gin"
 	"github.com/jmoiron/sqlx"
 	"time"
