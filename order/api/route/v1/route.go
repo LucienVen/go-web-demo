@@ -20,6 +20,7 @@ func Setup(env *bootstrap.Env, timeout time.Duration, db *sqlx.DB, routeV1 *gin.
 	// public APIs 公共API
 	publicRouteV1 := routeV1.Group("")
 	NewTestRouter(env, timeout, db, publicRouteV1)
+	NewProductRouter(env, timeout, db, publicRouteV1)
 
 	// Private APIs 私有API
 	//protectedRouteV1 := routeV1.Group("")
