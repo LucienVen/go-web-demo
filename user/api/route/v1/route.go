@@ -21,6 +21,8 @@ func Setup(env *bootstrap.Env, timeout time.Duration, db *sqlx.DB, routeV1 *gin.
 	publicRouteV1 := routeV1.Group("")
 	NewTestRouter(env, timeout, db, publicRouteV1, rpcClient)
 
+	NewUserRouter(env, timeout, db, publicRouteV1, rpcClient)
+
 	// Private APIs 私有API
 	//protectedRouteV1 := routeV1.Group("")
 	// 中间件
