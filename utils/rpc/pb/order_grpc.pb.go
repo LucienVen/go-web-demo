@@ -23,6 +23,7 @@ const _ = grpc.SupportPackageIsVersion7
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type OrderServiceClient interface {
 	OrderSayHello(ctx context.Context, in *OrderSayHelloReq, opts ...grpc.CallOption) (*OrderSayHelloRes, error)
+	GetOrderById(ctx context.Context, in *GetOrderByIdReq, opts ...grpc.CallOption) (*GetOrderByIdRes, error)
 }
 
 type orderServiceClient struct {
@@ -42,11 +43,21 @@ func (c *orderServiceClient) OrderSayHello(ctx context.Context, in *OrderSayHell
 	return out, nil
 }
 
+func (c *orderServiceClient) GetOrderById(ctx context.Context, in *GetOrderByIdReq, opts ...grpc.CallOption) (*GetOrderByIdRes, error) {
+	out := new(GetOrderByIdRes)
+	err := c.cc.Invoke(ctx, "/order.OrderService/GetOrderById", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // OrderServiceServer is the server API for OrderService service.
 // All implementations must embed UnimplementedOrderServiceServer
 // for forward compatibility
 type OrderServiceServer interface {
 	OrderSayHello(context.Context, *OrderSayHelloReq) (*OrderSayHelloRes, error)
+	GetOrderById(context.Context, *GetOrderByIdReq) (*GetOrderByIdRes, error)
 	mustEmbedUnimplementedOrderServiceServer()
 }
 
@@ -56,6 +67,9 @@ type UnimplementedOrderServiceServer struct {
 
 func (UnimplementedOrderServiceServer) OrderSayHello(context.Context, *OrderSayHelloReq) (*OrderSayHelloRes, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method OrderSayHello not implemented")
+}
+func (UnimplementedOrderServiceServer) GetOrderById(context.Context, *GetOrderByIdReq) (*GetOrderByIdRes, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetOrderById not implemented")
 }
 func (UnimplementedOrderServiceServer) mustEmbedUnimplementedOrderServiceServer() {}
 
@@ -88,6 +102,24 @@ func _OrderService_OrderSayHello_Handler(srv interface{}, ctx context.Context, d
 	return interceptor(ctx, in, info, handler)
 }
 
+func _OrderService_GetOrderById_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetOrderByIdReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(OrderServiceServer).GetOrderById(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/order.OrderService/GetOrderById",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(OrderServiceServer).GetOrderById(ctx, req.(*GetOrderByIdReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // OrderService_ServiceDesc is the grpc.ServiceDesc for OrderService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -98,6 +130,10 @@ var OrderService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "OrderSayHello",
 			Handler:    _OrderService_OrderSayHello_Handler,
+		},
+		{
+			MethodName: "GetOrderById",
+			Handler:    _OrderService_GetOrderById_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
