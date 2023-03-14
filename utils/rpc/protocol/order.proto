@@ -7,6 +7,7 @@ package order;
 // 作为server
 service OrderService {
   rpc OrderSayHello(OrderSayHelloReq) returns (OrderSayHelloRes) {}
+  rpc GetOrderById(GetOrderByIdReq) returns (GetOrderByIdRes) {}
 }
 
 message OrderSayHelloReq {
@@ -15,4 +16,18 @@ message OrderSayHelloReq {
 
 message OrderSayHelloRes {
   string greet = 1; // 问候语
+}
+
+message GetOrderByIdReq {
+  int64 id = 1;
+}
+
+message GetOrderByIdRes {
+  int64 id = 1;
+  int64 user_id = 2;
+  int64 product_id = 3;
+  int64 payment = 4;
+  string status = 5;
+  int64 create_time = 6;
+  int64 update_time =7;
 }
