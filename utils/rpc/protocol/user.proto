@@ -7,6 +7,7 @@ package user;
 // 作为server
 service UserService {
   rpc UserSayHello(UserSayHelloReq) returns (UserSayHelloRes) {}
+  rpc GetUserById(GetUserByIdReq) returns (GetUserByIdRes) {}
 }
 
 message UserSayHelloReq {
@@ -15,4 +16,16 @@ message UserSayHelloReq {
 
 message UserSayHelloRes {
   string greet = 1; // 问候语
+}
+
+message GetUserByIdReq {
+  int64 id = 1;
+}
+
+message GetUserByIdRes {
+  int64 id = 1;
+  string name = 2;
+  string status = 3;
+  int64 create_time = 4;
+  int64 update_time = 5;
 }
