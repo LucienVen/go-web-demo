@@ -1,7 +1,7 @@
 version: '3.8'
 
 services:
-  go-web-demo-server2:
+  order:
 #    depends_on:
 #      - mysql
     build:
@@ -15,9 +15,10 @@ services:
     restart: unless-stopped
 
 networks:
-  go-web-demo-net:
+  default:
     # 声明这个网络是外部定义的
-    external: true
+    external:
+      name: go-web-demo-net
 
 #  mysql:
 #    image: mysql:latest

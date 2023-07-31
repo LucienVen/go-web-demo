@@ -1,7 +1,7 @@
 version: '3.8'
 
 services:
-  go-web-demo-server1:
+  user:
     depends_on: 
       - mysql
     build:
@@ -41,6 +41,7 @@ services:
       --lower-case-table-names=1 # 设置表名大小写不敏感
 
 networks:
-  go-web-demo-net:
+  default:
     # 声明这个网络是外部定义的
-    external: true
+    external:
+      name: go-web-demo-net

@@ -6,8 +6,8 @@ services:
       - mysql
     build:
       # 使用 context 指令指定 Dockerfile.bak 所在文件夹的路径
-      context: .
-      dockerfile: ./user/Dockerfile
+      context: ./user
+      dockerfile: Dockerfile
     container_name: user
     env_file: ./user/.env
     ports:
@@ -19,8 +19,8 @@ services:
       - mysql
     build:
       # 使用 context 指令指定 Dockerfile.bak 所在文件夹的路径
-      context: .
-      dockerfile: ./order/Dockerfile
+      context: ./order
+      dockerfile: Dockerfile
     container_name: order
     env_file: ./order/.env
     ports:
@@ -31,7 +31,7 @@ services:
     image: mysql:latest
     container_name: mysql
     restart: unless-stopped
-    env_file: ./user/.env
+    env_file: .env
     ports:
       - 3306:3306
     environment:
