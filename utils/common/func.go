@@ -16,3 +16,7 @@ func GetOutboundIP() (net.IP, error) {
 	localAddr := conn.LocalAddr().(*net.UDPAddr)
 	return localAddr.IP, nil
 }
+
+func Hello() string {
+	return "Hello, world"
+}
