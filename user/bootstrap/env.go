@@ -19,9 +19,15 @@ type Env struct {
 	RefreshTokenExpiryHour int    `mapstructure:"REFRESH_TOKEN_EXPIRY_HOUR"`
 	AccessTokenSecret      string `mapstructure:"ACCESS_TOKEN_SECRET"`
 	RefreshTokenSecret     string `mapstructure:"REFRESH_TOKEN_SECRET"`
-	UserServicePort        string `mapstructure:"USER_SERVICE_PORT"`  // user rpc 监听端口
-	OrderServicePort       string `mapstructure:"ORDER_SERVICE_PORT"` // order rpc 监听端口
-	RpcClient              string `mapstructure:"RPC_CLIENT"`         // 服务名:端口，逗号分割
+	ServicePort            int    `mapstructure:"SERVICE_PORT"` // tcp 监听端口
+	//OrderServicePort       string `mapstructure:"ORDER_SERVICE_PORT"` // order rpc 监听端口
+	RpcClient string `mapstructure:"RPC_CLIENT"` // 服务名:端口，逗号分割
+
+	ConsulSetting struct {
+		Tag []string `mapstructure:"CONSUL_DISCOVERY_TAG"` // 本服务tag备注
+		//Port int `mapstructure:"CONSUL_DISCOVERY_PORT"` //
+		Address string `mapstructure:"CONSUL_DISCOVERY_ADDRESS"` // http://8.134.52.222:8500
+	}
 }
 
 func NewEnv() *Env {

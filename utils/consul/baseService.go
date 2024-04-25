@@ -10,8 +10,8 @@ type DiscoveryConfig struct {
 	Name    string
 	Tags    []string
 	Port    int
-	Address string
-	Ip      string
+	Address string // consul服务地址
+	TcpAddr string // 本机tcp地址（带port）
 }
 
 func (dc *DiscoveryConfig) GetId() string {
@@ -23,7 +23,7 @@ func (dc *DiscoveryConfig) GetId() string {
 }
 
 func (dc *DiscoveryConfig) BuildId() string {
-	return fmt.Sprintf("%s-%s-%d", dc.Name, dc.Ip, dc.Port) // 服务唯一ID
+	return fmt.Sprintf("%s-%s-%d", dc.Name, dc.Address, dc.Port) // 服务唯一ID
 }
 
 func (dc *DiscoveryConfig) GetCheckTcpAddr() string {

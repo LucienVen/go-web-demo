@@ -22,7 +22,7 @@ func (c *Client) RegisterService() error {
 
 	// 健康检查
 	check := &consulapi.AgentServiceCheck{
-		TCP:      c.cfg.GetCheckTcpAddr(),
+		TCP:      c.cfg.TcpAddr,
 		Timeout:  AgentServiceCheckOpt_Timeout,
 		Interval: AgentServiceCheckOpt_Interval,
 		DeregisterCriticalServiceAfter: AgentServiceCheckOpt_DeregisterCriticalServiceAfter,

@@ -5,6 +5,7 @@ import (
 	routeV1 "github.com/LucienVen/go-web-demo/user/api/route/v1"
 	"github.com/LucienVen/go-web-demo/user/bootstrap"
 	logger "github.com/LucienVen/go-web-demo/user/internal/log"
+	"github.com/LucienVen/go-web-demo/utils/consul"
 	"github.com/gin-gonic/gin"
 	"log"
 	"net"
@@ -44,7 +45,7 @@ func main() {
 
 	// 初始化grpc
 	go func() {
-		lis, err := net.Listen("tcp", env.UserServicePort)
+		lis, err := net.Listen("tcp", env.ServicePort)
 		if err != nil {
 			errChan <- err
 		}
@@ -54,6 +55,28 @@ func main() {
 			errChan <- err
 		}
 	}()
+
+	//addr, err := common.GetOutboundIP()
+	//if err != nil {
+	//	logger.Error("main GetOutboundIP err", zap.Any("err", err.Error()))
+	//}
+
+	discoveryConfig := consul.DiscoveryConfig{
+		Name:    env.AppName,
+		Tags:    env.ConsulSetting.Tag,
+		Port:    env.ServicePort,
+		Address: env.ConsulSetting.Address,
+	}
+
+	discoveryConfig.BuildId()
+
+	consulClient, err := consul.NewConsul(discoveryConfig)
+	if err != nil {
+		panic(fmt.Sprintf("Run consul.NewConsul err: %v", err.Error()))
+	}
+
+	consulClient.RegisterService()
+
 
 	select {
 	case err := <-errChan:
