@@ -16,13 +16,13 @@ func (c *Client) RegisterService() error {
 		ID:      c.cfg.GetId(),
 		Name:    c.cfg.Name,
 		Tags:    c.cfg.Tags,
-		Port:    c.cfg.Port,
-		Address: c.cfg.Address,
+		Port:    c.cfg.Port, // 注册服务的tcp监听端口
+		Address: c.cfg.TcpAddr, // 本机ipv4端口
 	}
 
 	// 健康检查
 	check := &consulapi.AgentServiceCheck{
-		TCP:      c.cfg.TcpAddr,
+		TCP:      c.cfg.GetCheckTcpAddr(),
 		Timeout:  AgentServiceCheckOpt_Timeout,
 		Interval: AgentServiceCheckOpt_Interval,
 		DeregisterCriticalServiceAfter: AgentServiceCheckOpt_DeregisterCriticalServiceAfter,
