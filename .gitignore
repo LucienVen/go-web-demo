@@ -18,5 +18,4 @@
 #*.env
 .idea/
 
-vendor
-utils/vendor/
+vendor/
