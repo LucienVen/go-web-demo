@@ -16,7 +16,7 @@ func App() Application {
 	app := &Application{}
 	app.Env = NewEnv()
 	app.Mysql = NewMysqlDatabase(app.Env)
-	app.Rpc = NewRpcServer(app.Env)
+	//app.Rpc = NewRpcServer(app.Env)
 	app.RpcClient = InitRpcClient(app.Env)
 	return *app
 }

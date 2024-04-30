@@ -6,7 +6,6 @@ require (
 	github.com/LucienVen/go-web-demo/utils v0.0.0-20230220160849-76fb0dd785f9
 	github.com/jmoiron/sqlx v1.3.5
 	github.com/pkg/errors v0.9.1
-	github.com/rs/xid v1.5.0
 	golang.org/x/net v0.17.0
 	google.golang.org/grpc v1.53.0
 )

@@ -1,6 +1,8 @@
 package bootstrap
 
 import (
+	"fmt"
+	"github.com/LucienVen/go-web-demo/utils/common"
 	"github.com/spf13/viper"
 	"log"
 )
@@ -21,7 +23,7 @@ type Env struct {
 	RefreshTokenSecret     string `mapstructure:"REFRESH_TOKEN_SECRET"`
 	ServicePort            int    `mapstructure:"SERVICE_PORT"` // tcp 监听端口
 	//OrderServicePort       string `mapstructure:"ORDER_SERVICE_PORT"` // order rpc 监听端口
-	RpcClient string `mapstructure:"RPC_CLIENT"` // 服务名:端口，逗号分割
+	RpcClient string `mapstructure:"RPC_CLIENT"` // 服务名:端口
 
 	ConsulSetting struct {
 		Tag []string `mapstructure:"CONSUL_DISCOVERY_TAG"` // 本服务tag备注
@@ -48,5 +50,15 @@ func NewEnv() *Env {
 		log.Println("The App is running in development env")
 	}
 
+	if env.RpcClient == "" {
+		if ip, err := common.GetOutboundIP(); err != nil {
+			env.RpcClient = ip.String()
+		}
+	}
+
 	return &env
+}
+
+func (e *Env) GetServiceAddr() string {
+	return fmt.Sprintf("%s:%d", e.ServerAddress, e.ServicePort)
 }
