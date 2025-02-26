@@ -1,0 +1,6 @@
+[submodule "shared-model-repo"]
+	path = shared-model-repo
+	url = git@github.com:LucienVen/shared-model-repo.git
+[submodule "shared-proto-repo"]
+	path = shared-proto-repo
+	url = git@github.com:LucienVen/shared-proto-repo.git
