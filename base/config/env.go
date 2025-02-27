@@ -1,20 +1,16 @@
 package config
 
 import (
-	"fmt"
-	"log"
+	"errors"
 
-	"github.com/spf13/viper"
+	"github.com/LucienVen/go-web-demo/common/pkg/config"
+
+	"reflect"
 )
 
-// Env interface 定义
-// type Env interface {
-// 	Get(key string) (interface{}, error)
-// 	Set(key string, value interface{}) error
-// 	IsDevelopment() bool
-// }
+var Config *Env
 
-type Config struct {
+type Env struct {
 	AppEnv                 string `mapstructure:"APP_ENV"`
 	AppName                string `mapstructure:"APP_NAME"`
 	ServerAddress          string `mapstructure:"SERVER_ADDRESS"`
@@ -33,28 +29,32 @@ type Config struct {
 	RpcClient              string `mapstructure:"RPC_CLIENT"`         // 服务名:端口，逗号分割
 }
 
-// NewEnv 函数
-func InitConfig(filePath string) (*Config, error) {
-
-	config := Config{}
-
-	if filePath == "" {
-		filePath = ".env"
+func (e *Env) Get(key string) (interface{}, error) {
+	val := reflect.ValueOf(e).Elem()
+	field := val.FieldByName(key)
+	if !field.IsValid() {
+		return nil, errors.New("key not found")
 	}
+	return field.Interface(), nil
+}
 
-	viper.SetConfigFile(filePath)
-
-	err := viper.ReadInConfig()
-	if err != nil {
-		log.Fatal("Can't find the file .env : ", err)
+func (e *Env) Set(key string, value interface{}) error {
+	val := reflect.ValueOf(e).Elem()
+	field := val.FieldByName(key)
+	if !field.IsValid() {
+		return errors.New("key not found")
 	}
-
-	err = viper.Unmarshal(&config)
-	if err != nil {
-		log.Fatal("Environment can't be loaded: ", err)
+	if !field.CanSet() {
+		return errors.New("cannot set value")
 	}
+	field.Set(reflect.ValueOf(value))
+	return nil
+}
 
-	fmt.Printf("Loaded config: %+v\n", config)
+func (e *Env) IsDevelopment() bool {
+	return e.AppEnv == "development"
+}
 
-	return &config, nil
+func ConfigInit() {
+	Config = config.NewEnv()
 }
