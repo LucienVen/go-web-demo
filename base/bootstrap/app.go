@@ -2,18 +2,21 @@ package bootstrap
 
 import (
 	"fmt"
-
-	"github.com/LucienVen/go-web-demo/base/config"
+	"github.com/LucienVen/go-web-demo/common/pkg/config"
 )
 
 type Application struct{
-	Env *config.Env
+	Env *config.Config
 }
 
 func App() Application {
-	config.ConfigInit()
+	config, err := config.InitConfig(".env")
+	if err != nil {
+		panic(err)
+	}
+
 	return Application{
-		Env: config.Config,
+		Env: config,
 	}
 
 }

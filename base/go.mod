@@ -2,8 +2,7 @@ module github.com/LucienVen/go-web-demo/base
 
 go 1.22.2
 
-
-require github.com/LucienVen/go-web-demo/common v0.0.0-00010101000000-000000000000
+require github.com/LucienVen/go-web-demo/common v0.0.0
 
 require (
 	github.com/fsnotify/fsnotify v1.7.0 // indirect
@@ -27,6 +26,5 @@ require (
 	gopkg.in/ini.v1 v1.67.0 // indirect
 	gopkg.in/yaml.v3 v3.0.1 // indirect
 )
-
 
 replace github.com/LucienVen/go-web-demo/common => ../common
